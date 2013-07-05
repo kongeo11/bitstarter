@@ -15,6 +15,20 @@ app.listen(port, function() {
 });
 
 function sendMessage() {
-    return "my message";
+    var fs = require('fs');
+    var fileSize = 3;
+    
+    fs.stat('./index.html', function(error, stats) {
+		fileSize = stats.size;
+	});
 
-} 
+
+    return fileSize;
+
+    //var buffer = new Buffer(fileSize);
+    //buffer.write(fs.readFileSync('index.html'), 'utf-8');
+
+    //return buffer.toString("utf-8", 0, fileSize);
+
+
+}
