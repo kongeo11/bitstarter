@@ -23,7 +23,7 @@ function sendMessage() {
 	});
 
 
-    return fileSize;
+    return fileSize.toString();
 
     //var buffer = new Buffer(fileSize);
     //buffer.write(fs.readFileSync('index.html'), 'utf-8');
