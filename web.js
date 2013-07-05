@@ -1,6 +1,6 @@
 var express = require('express');
-
 var app = express.createServer(express.logger());
+
 
 app.get('/', function(request, response) {
   var message = sendMessage();
@@ -15,20 +15,15 @@ app.listen(port, function() {
 });
 
 function sendMessage() {
-    var fs = require('fs');
-    var fileSize = 3;
+    var fs = require('fs');    
+    var stats = fs.statSync('./index.html');
+
+    this.fileSize = stats.size;
     
-    fs.stat('./index.html', function(error, stats) {
-		fileSize = stats.size;
-	});
+    var buffer = new Buffer(fileSize);
+    buffer.write(fs.readFileSync('./index.html', 'utf-8'), 'utf-8');
 
-
-    return fileSize.toString();
-
-    //var buffer = new Buffer(fileSize);
-    //buffer.write(fs.readFileSync('index.html'), 'utf-8');
-
-    //return buffer.toString("utf-8", 0, fileSize);
+    return buffer.toString('utf-8', 0, this.fileSize-1);
 
 
 }
